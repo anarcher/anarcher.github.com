@@ -5,7 +5,7 @@ layout: post
 
 # Disco(http://discoproject.com/) 사용기
 
-[Disco][Disco]에 대한 정보는 [Tutorial][Tutorial]을 보면 알수 있고, Disco을 조금 써보면서 알게된 부분을 정리해보자. 
+[Disco][Disco]을 잘 모르지만, 이번에 통계관련 계산에 한번 써봤다. 
 
 ## map/reduce
 
