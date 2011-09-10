@@ -1,0 +1,86 @@
+---
+title: batman.js와 coffescript 
+layout: post
+---
+
+# batman.js와 coffescript
+
+문득 [batman.js][batmanjs]에 관심이 생겨서 잠깐 [Document][Document]을 보게 되었다. 
+아마 [batman.js][batmanjs]와 가장 비슷한 framework이라면 [backbone.js][backbonejs]일것 같은데. 
+둘의 가장 큰 차이는 backbone.js는 javascript으로 구성되어 있다는 점이고, 
+batman.js은 coffescript으로 되어 있는 점일듯 하다. [^1]
+
+## 선언적인 구성 
+
+다음의 코드를 보면, 
+
+{% highlight coffeescript %}
+
+class Box extends Batman.Object
+    constructor: (@length, @width, @height) ->
+    @accessor 'volume',
+        get: (key) -> @get('length') * @get('width') * @get('height')
+
+box = new Box(16,16,12)
+box.get 'volume'
+# returns 3072
+
+class BatBelt extends Batman.App
+    @global yes
+
+    @controller 'app', 'gadgets'
+    @model 'gadget'
+
+    @root 'app#index'
+    @route 'faq/:questionID', 'app#faq'
+    @resources 'gadgets'
+
+{% endhighlight %}
+
+자바로 보면 @controller이 annotation으로 보일지도 모르겠다.[^2]
+@은 instance을 가르키기 때문에, @model은 this.model('gadget')으로 써도 무방하다. 
+
+즉 coffeescript으로 표현력으로 좀더 선언적인 형태의 코드 수정을 batman.js에서 좀더 많이 
+사용하는 듯 하다. 
+
+## template-less view
+
+사실 template-less view가 batman.js이 backbone.js와 크게 차이 라는 부분이라고 생각한다. [^3]
+
+{% highlight html %}
+<ul id="products">
+    <li data-foreach-product="Product.all" data-mixin="animation">
+      <a data-route="product" data-bind="product.name">name will go here</a>
+    </li>
+          
+    <li>
+        <span data-bind="products.length"></span> 
+        <span data-bind="'products' | pluralize products.length"></span>
+    </li>
+</ul>
+{% endhighlight %}
+
+Server-side에서도 직접 html dom을 기반으로하는 template engine이 있다. 
+하지만 그리 많이 쓰이지 않는데. [^4]
+
+template쪽에 많은 기능이 가능하도록 하는 것은 강제하는 쪽이 관심의 분리가 되는 코드를 만들게 되는 것 같다. 
+
+특히 controller에서 dom을 직접 핸들링 할수 있기 때문에. 이런 식의 접근이 좀더 유리하지 않나 싶다. 
+
+
+## 하지만 
+
+아직 내가 batmanjs보다 backbonejs에 좀 더 비중을 두는 점은
+batmanjs의 코드를 읽었을때, backbonejs의 코드를 읽을때보다 읽기가 어렵다는 점이다. 
+아직 coffeescript을 잘 모르는 때문에 생기는 문제이긴 하지만. 쓰는 내가 이해하기 어렵기 때문에. 
+다음에 좀 더 역량이 생기면 그때 좀더 진행해봐야 겠다. 
+
+
+[^1]: 재미있는 점은 coffescript의 저자가 backbone.js을 만들었다는 사실.  
+[^2]: Python도 decorator가 있다. 
+[^3]: backbone.js은 특정 template engine을 구정하지 않는다. batman.js가 full-stack framework을 표방하는 반해, backbone.js은 기존의 여러 라이브러리와 함께 쓰도록 장려하는 편이다. 
+[^4]: (거의) 최초의 Web framework이라고 할수 있는 WebObject이 그러하다. 
+[batmanjs]: http://batmanjs.org/
+[backbonejs]: http://documentcloud.github.com/backbone/
+
+
