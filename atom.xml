@@ -4,15 +4,15 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Dustin Sallings</title>
+ <title>Anarcher</title>
  <link rel="hub" href="http://pubsubhubbub.appspot.com/" />
- <link href="http://dustin.github.com/atom.xml" rel="self"/>
- <link href="http://dustin.github.com/"/>
+ <link href="http://anarcher.github.com/atom.xml" rel="self"/>
+ <link href="http://anarcher.github.com/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://dustin.github.com/</id>
+ <id>http://anarcher.github.com/</id>
  <author>
-   <name>Dustin Sallings</name>
-   <email>dustin@spy.net</email>
+   <name>Anarcher</name>
+   <email>anarcher@gmail.com</email>
  </author>
 
  {% for post in site.posts %}
